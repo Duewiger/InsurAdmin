@@ -1,0 +1,21 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}{% trans "Verify Code" %}{% endblock title %}
+
+{% block content %}
+  <h2>{% trans "Verify Code" %}</h2>
+  <form method="post" action="{% url 'verify_code' %}">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="code">{% trans "Verification Code" %}</label>
+      <input type="text" name="code" id="code" class="form-control">
+    </div>
+    <button class="btn btn-outline-info submit-button" type="submit">{% trans "Verify" %}</button>
+    {% if error %}
+      <p style="color:red;">{{ error }}</p>
+    {% endif %}
+  </form>
+{% endblock content %}

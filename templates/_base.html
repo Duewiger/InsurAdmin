@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Fullautomized Insurance Administration{% endblock title %}</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+  <!-- reCAPTCHA -->
+  <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home' %}"><img class="logo-img" src="{% static 'images/InsurAdmin-Logo.png' %}" alt="InsurAdmin Logo"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'assistant' %}">Assistant</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'insurance_list' %}">Insurances</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'insurance_list' %}">Processes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_data_list' %}">Account</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_logout' %}">Log Out</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_login' %}">Log In</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a>
+          </li>
+          {% endif %}
+        </ul>
+        <form class="d-flex" action="{% url 'search_results' %}" method="get">
+          <input class="me-2 searchbar-input" type="search" name="q" placeholder="Search" aria-label="Search" >
+          <button class="btn btn-outline-info search-button" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    {% block content %}{% endblock content %}
+  </div>
+
+  <!-- Toast Container -->
+  <div aria-live="polite" aria-atomic="true" class="position-relative" style="min-height: 200px;">
+    <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 1050;">
+      {% for message in messages %}
+      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+        <div class="toast-header" style="background-color: #212529; border-bottom: 1px solid #0dcaf0;">
+          <strong class="me-auto" style="color: #0dcaf0;">Message</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" style="color: #0dcaf0;"></button>
+        </div>
+        <div class="toast-body" style="background-color: #212529; color: #0dcaf0;">
+          {{ message }}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <!-- jQuery -->
+  <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+  <!-- Custom JS -->
+  <script src="{% static 'js/main.js' %}"></script>
+  {% comment %} <!-- Google Maps -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA16vcen20xrDdzDYsUs2Zppzutc34DiIE&libraries=places"></script> {% endcomment %}
+  <!-- Toasts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+      var toastList = toastElList.map(function (toastEl) {
+        return new bootstrap.Toast(toastEl)
+      })
+      toastList.forEach(toast => toast.show())
+    });
+  </script>
+  {% comment %} {% block extra_scripts %}
+  {% endblock extra_scripts %} {% endcomment %}
+</body>
+</html>

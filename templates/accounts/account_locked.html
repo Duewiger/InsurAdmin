@@ -1,0 +1,11 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}Account Locked{% endblock title %}
+{% block content %}
+    <div class="locked-container">
+        <img src="{% static 'images/padlock.png' %}" class="locked-image" alt="Image of a Padlock">
+        <h1>Dein Konto wurde vorübergehend gesperrt</h1>
+        <p>Aufgrund zu vieler fehlgeschlagener Anmeldeversuche wurde dein Konto vorübergehend gesperrt. Bitte versuche es später erneut oder kontaktiere den Support.</p>
+    </div>
+{% endblock content %}

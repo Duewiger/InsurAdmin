@@ -1,0 +1,148 @@
+body {
+  min-height: 75rem;
+  padding-top: 8.5rem;
+  padding-bottom: 8.5rem;
+  color: #0dcaf0;
+  background-color: black;
+  font-weight: 400;
+}
+
+.navbar-dark .navbar-brand {
+  margin-left: 10px;
+}
+
+.logo-img {
+  width: 50px;
+  height: 50px;
+}
+
+.navbar-dark .nav-link {
+  font-size: 20px;
+  font-weight: 300;
+  margin-left: 10px;
+  color: #0dcaf0 !important;
+  transition-duration: 0.3s;
+}
+
+.navbar-dark .nav-link:hover,
+.navbar-dark .nav-link:focus {
+  font-weight: 600;
+  color: #FFFFFF !important;
+}
+
+.searchbar-input {
+  padding: 10px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: #101010;
+  color: #0dcaf0;
+  font-size: 16px;
+}
+
+.search-button {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.search-button:hover,
+.search-button:focus {
+  color: #FFFFFF !important;
+}
+
+.submit-button {
+  font-size: 16px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.submit-button:hover,
+.submit-button:focus {
+  color: #FFFFFF !important;
+}
+
+.card--overview {
+  margin-top: 50px;
+}
+/******* Style for Assistant here *******/
+#chat-container {
+  width: 100%;
+  height: 800px;
+  border: 1px transparent;
+  overflow-y: hidden;
+  padding: 10px;
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
+
+.message {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.user-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: #101010;
+  color: #0dcaf0;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+#send-button {
+  width: 100%;
+  padding: 10px;
+  font-size: 20px;
+  box-sizing: border-box;
+  background-color: #101010;
+  color: #0dcaf0;
+  border: 1px solid #0dcaf0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#send-button:hover {
+  background-color: #0dcaf0;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+/*************************************/
+
+.card {
+  background-color: #212529;
+  border: 1px solid #0dcaf0;
+}
+
+.card .list-group .list-group-item {
+  color: #0dcaf0 !important;
+  background-color: #212529 !important;
+}
+
+.create-button {
+  font-size: 20px;
+  margin-top: 25px;
+}
+
+.delete-row {
+  margin-top: 50px;
+}
+
+.locked-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.locked-image {
+  width: 96px;
+  height: 96px;
+  margin-bottom: 10px;
+}
+
+.form-group--login {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

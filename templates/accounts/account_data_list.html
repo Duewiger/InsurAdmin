@@ -1,0 +1,61 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}Account{% endblock title %}
+{% block content %}
+    <div class="row">
+      <div class="col">
+        {% for custom_user in account_data_list %}
+        <div class="card" style="width: 30rem;">
+            {% if custom_user.profile_picture %}
+              <img src="{{ custom_user.profile_picture.url }}" alt="Profile Picture for {{ custom_user.first_name}} {{ custom_user.last_name}}">
+            {% else %}
+              <img src="{% static 'images/vecteezy_default-profile-picture-avatar-user-avatar-icon-person_21548095.jpg' %}" class="card-img-top" alt="placeholder picture for {{ custom_user.first_name}} {{ custom_user.last_name}}">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ custom_user.first_name }} {{ custom_user.last_name }}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">{{ custom_user.birth_date }}</li>
+              <li class="list-group-item">{{ custom_user.street }} {{ custom_user.house_number }}</li>
+              <li class="list-group-item">{{ custom_user.postal_code }} {{ custom_user.city }}</li>
+              <li class="list-group-item">{{ custom_user.place_of_birth }}</li>
+              <li class="list-group-item">{{ custom_user.marital_status }}</li>
+              <li class="list-group-item">{{ custom_user.nationality }}</li>
+              <li class="list-group-item">{{ custom_user.phone_number }}</li>
+              <li class="list-group-item">{{ custom_user.iban }}</li>
+              <li class="list-group-item">{{ custom_user.bic }}</li>
+              <li class="list-group-item">{{ custom_user.financial_institution }}</li>
+            </ul>
+            <div class="card-body">
+              <a href="{% url 'home' %}" class="btn btn-outline-info submit-button" >Dashboard View</a>
+              <a href="{% url 'account_data_edit' pk=custom_user.id %}" class="btn btn btn-outline-info submit-button">Edit Profile</a>
+              <a href="{% url 'upload_document' %}" class="btn btn-outline-info submit-button">Upload Documents</a>
+            </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="col">
+        <div class="btn-group">
+          <button type="button" class="btn btn-outline-info submit-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Your Documents
+          </button>
+          <ul class="dropdown-menu">
+            {% for document in documents %}
+              <li><a class="dropdown-item" href="{{ document.file.url }}">{{ document.file.name }}</a></li>
+            {% endfor %}
+            {% if not documents %}
+              <li><span class="dropdown-item">No documents available</span></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row delete-row">
+      <div class="col">
+        <div class="btn-group">
+          <a href="{% url 'account_delete' pk=request.user.id %}" class="btn btn-outline-danger submit-button">Delete Account</a>
+        </div>
+      </div>
+    </div>
+{% endblock content %}

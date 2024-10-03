@@ -1,0 +1,30 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}{{ insurance.title }}{% endblock title %}
+
+{% block content %}
+    <div class="card card--overview">
+        <div class="card-header">
+        Policy number: {{ insurance.policy_number }}
+        </div>
+        <div class="card-body">
+        <h5 class="card-title">Line of business: {{ insurance.line_of_business }}</h5>
+        <p class="card-text">Insurer: {{ insurance.insurer }}</p>
+        <p class="card-text">Premium: {{ insurance.premium }} €</p>
+        <hr>
+        <p class="card-text">Policy Holder: {{ insurance.policy_holder }}</p>
+        <p class="card-text">Commencement Date: {{ insurance.commencement_date }}</p>
+        <p class="card-text">Expiry Date: {{ insurance.expiry_date }}</p>
+        <p class="card-text">Policy Maturity: {{ insurance.policy_maturity }}</p>
+        <p class="card-text">Payment Frequency: {{ insurance.payment_frequency }}</p>
+        <div class="card-body">
+            {% if insurance.insurance_policy and insurance.insurance_policy.url %}
+                <a href="{{ insurance.insurance_policy.url }}" class="btn btn-outline-info submit-button" target="_blank" >Open PDF-File</a>
+            {% endif %}
+            <a href="{% url 'insurance_edit' pk=insurance.id %}"  class="btn btn btn-outline-info submit-button">Edit Insurance Data</a>
+            <a href="{% url 'insurance_delete' pk=insurance.id %}" class="btn btn btn-outline-danger submit-button">Delete Insurance</a>
+        </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,29 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Account{% endblock title %}
+
+{% block content %}
+  <h2>Account</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      	<button class="btn btn-outline-info submit-button create-button" type="submit">Save</button>
+    </div>
+  </form>
+
+  <!-- CSS FITTING -->
+  <style>
+    .form-control {
+        padding: 10px;
+        border-radius: 5px;
+        box-sizing: border-box;
+        background-color: #101010;
+        color: #0dcaf0;
+        font-size: 16px;
+        margin-right: 0.5rem !important;
+    }
+  </style>
+{% endblock content %}

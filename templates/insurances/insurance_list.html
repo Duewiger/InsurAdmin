@@ -1,0 +1,24 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}Insurances{% endblock title %}
+
+{% block content %}
+    <h1>Your Insurances</h1>
+    {% for insurance in insurance_list %}
+    <div class="card card--overview">
+        <div class="card-header">
+          Policy number: {{ insurance.policy_number }}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Line of business: {{ insurance.line_of_business }}</h5>
+          <p class="card-text">Insurer: {{ insurance.insurer }}</p>
+          <p class="card-text">Premium: {{ insurance.premium }} €</p>
+          <a href="{{ insurance.get_absolute_url }}" class="btn btn-outline-info submit-button">Check it out</a>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a href="{% url 'insurance_creation' %}" class="btn btn-outline-info submit-button create-button" >Create New Insurance</a>
+    </div>
+{% endblock content %}

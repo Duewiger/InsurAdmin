@@ -1,0 +1,76 @@
+{% extends "_base.html" %}
+
+{% block title %}
+Find your representative
+{% endblock %}
+
+{% block content %}
+<input id="pac-input" class="controls" type="text" placeholder="Search Box">
+<div id="map" style="height: 500px; width: 100%;"></div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: -34.397, lng: 150.644},
+      zoom: 8
+    });
+
+    var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+    searchBox.addListener('places_changed', function() {
+      var places = searchBox.getPlaces();
+
+      if (places.length == 0) {
+        return;
+      }
+
+      var bounds = new google.maps.LatLngBounds();
+      places.forEach(function(place) {
+        if (!place.geometry) {
+          console.log("Returned place contains no geometry");
+          return;
+        }
+
+        // Hier können Sie Ihre Logik einfügen, um den ausgewählten Betreuer zu verarbeiten
+        // Zum Beispiel: Senden Sie den Ort an Ihren Django-Server
+
+        if (place.geometry.viewport) {
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+      });
+      map.fitBounds(bounds);
+    });
+
+    // Laden der Versicherungsbetreuer-Daten und Markieren auf der Karte
+    loadRepresentative(map);
+  }
+
+  function loadRepresentative(map) {
+    fetch('/api/representative/')
+      .then(response => response.json())
+      .then(data => {
+        data.forEach(representative => {
+          var marker = new google.maps.Marker({
+            position: { lat: representative.latitude, lng: representative.longitude },
+            map: map,
+            title: representative.name
+          });
+
+          marker.addListener('click', function() {
+            // Logik, um den ausgewählten Betreuer als Betreuer des Nutzers festzulegen
+          });
+        });
+      });
+  }
+
+  // Initialisieren der Karte nach dem Laden der Seite
+  document.addEventListener('DOMContentLoaded', initMap);
+</script>
+{% endblock %}

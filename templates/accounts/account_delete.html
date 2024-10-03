@@ -1,0 +1,16 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Confirm Deletion{% endblock title %}
+
+{% block content %}
+    <h2>Confirm Deletion</h2>
+    <p>Are you sure you want to delete your account?</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{% url 'account_data_edit' pk=object.id %}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock content %}

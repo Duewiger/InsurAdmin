@@ -1,0 +1,17 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Assistant{% endblock title %}
+
+{% block content %}
+    <div id="chat-container">
+        <div class="message">
+            <p class="result"></p>
+        </div>
+        <form method="post" id="basicform">
+            {% csrf_token %}
+            {{ form.input }}
+            <button id="send-button" type="submit">Tell your Assistant</button>
+        </form>
+    </div>
+{% endblock content %}

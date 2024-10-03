@@ -1,0 +1,19 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Sign Up{% endblock title %}
+
+{% block content %}
+  <h2>Sign Up</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <br>
+    <form action="" method="POST">
+      <div class="g-recaptcha" data-sitekey="6LdWh-gpAAAAAORZcQdfYNhl2ed9AMVI0iz50ywP" data-action="SIGNUP"></div>
+      <br/>
+      <input class="btn btn-outline-info submit-button" type="submit" value="Sign Up">
+    </form>
+  </form>
+{% endblock content %}
